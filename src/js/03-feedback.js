@@ -18,21 +18,21 @@ function getFormValueAndSaveToLocalStorage() {
   localStorage.setItem('feedback-form-state', JSON.stringify(valueData));
 }
 
-function submitActions(e) {
-  console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
-  e.preventDefault();
-  e.currentTarget.reset();
-  localStorage.removeItem('feedback-form-state');
-}
-(function dataFromLocalStorage() {
-  const data = JSON.parse(localStorage.getItem('feedback-form-state'));
-  const email = document.querySelector('.feedback-form input');
-  const message = document.querySelector('.feedback-form textarea');
-  if (data) {
-    email.value = data.email;
-    message.value = data.message;
-  }
-})();
+// function submitActions(e) {
+//   console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
+//   e.preventDefault();
+//   e.currentTarget.reset();
+//   localStorage.removeItem('feedback-form-state');
+// }
+// (function dataFromLocalStorage() {
+//   const data = JSON.parse(localStorage.getItem('feedback-form-state'));
+//   const email = document.querySelector('.feedback-form input');
+//   const message = document.querySelector('.feedback-form textarea');
+//   if (data) {
+//     email.value = data.email;
+//     message.value = data.message;
+//   }
+// })();
 
 // import throttle from 'lodash.throttle';
 
