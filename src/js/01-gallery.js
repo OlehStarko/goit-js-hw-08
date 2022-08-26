@@ -4,8 +4,6 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 import SimpleLightbox from 'simplelightbox';
 // Change code below this line
 
-console.log(galleryItems);
-
 const galleryBox = document.querySelector('.gallery');
 
 const createGalleryItem = ({ preview, original, description }) =>
@@ -28,31 +26,8 @@ const galleryMarkup = galleryItems.reduce(
 
 galleryBox.insertAdjacentHTML('beforeend', galleryMarkup);
 
-galleryBox.addEventListener('click', onGalleryClick);
-
 new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
-  captionPosition: 'top',
+  captionPosition: 'bottom',
   captionDelay: 250,
 });
-
-function onGalleryClick(event) {
-  event.preventDefault();
-  if (event.target.nodeName !== 'IMG') {
-    return;
-  }
-  const imgBigSizesLink = event.target.getAttribute('data-source');
-  const modalWindow = basicLightbox.create(`
-    <img src="${imgBigSizesLink}" style="border-radius:16px;">
-`);
-  modalWindow.show();
-
-  document.addEventListener('keydown', onEscKeyPress);
-
-  function onEscKeyPress(event) {
-    document.querySelector('.basicLightbox');
-    if (event.code === 'Escape') {
-      modalWindow.close();
-    }
-  }
-}
