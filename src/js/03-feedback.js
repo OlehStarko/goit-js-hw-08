@@ -7,7 +7,7 @@ const refs = {
 };
 
 const formData = {};
-const STAROGE_KEY = 'feedback-form-state';
+const STORAGE_KEY = 'feedback-form-state';
 
 refs.form.addEventListener('submit', onFormSubmit);
 refs.form.addEventListener('input', throttle(onFormInput, 500));
@@ -16,11 +16,11 @@ checkLocalStorage();
 
 function onFormInput(evt) {
   formData[evt.target.name] = evt.target.value;
-  localStorage.setItem(STAROGE_KEY, JSON.stringify(formData));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
 
 function checkLocalStorage() {
-  const dataLocalStorage = localStorage.getItem(STAROGE_KEY);
+  const dataLocalStorage = localStorage.getItem(STORAGE_KEY);
   const parseDataLocalStorage = JSON.parse(dataLocalStorage);
 
   if (dataLocalStorage) {
@@ -32,6 +32,6 @@ function checkLocalStorage() {
 function onFormSubmit(evt) {
   evt.preventDefault();
   evt.currentTarget.reset();
-  localStorage.removeItem(STAROGE_KEY);
+  localStorage.removeItem(STORAGE_KEY);
   console.log(formData);
 }
