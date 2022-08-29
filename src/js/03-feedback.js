@@ -39,7 +39,15 @@ function onFormSubmit(evt) {
     alert('Ви не ввели ваші дані');
     return;
   }
-  alert('Ви ввели не всі дані');
+  if (
+    refs.emailInput.value === '' ||
+    refs.emailInput.value === undefined ||
+    refs.textarea.value === '' ||
+    refs.textarea.value === undefined
+  ) {
+    alert('Ви ввели не всі дані');
+    return;
+  }
 
   evt.currentTarget.reset();
   localStorage.removeItem(STORAGE_KEY);
