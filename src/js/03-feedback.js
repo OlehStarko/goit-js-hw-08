@@ -31,6 +31,16 @@ function checkLocalStorage() {
 
 function onFormSubmit(evt) {
   evt.preventDefault();
+
+  if (
+    (refs.emailInput.value === '' || refs.emailInput.value === undefined) &&
+    (refs.textarea.value === '' || refs.textarea.value === undefined)
+  ) {
+    alert('Ви не ввели ваші дані');
+    return;
+  }
+  alert('Ви ввели не всі дані');
+
   evt.currentTarget.reset();
   localStorage.removeItem(STORAGE_KEY);
   console.log(formData);
