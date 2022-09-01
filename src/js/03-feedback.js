@@ -6,7 +6,6 @@ const refs = {
   textarea: document.querySelector('.feedback-form textarea'),
 };
 
-const formData = {};
 const STORAGE_KEY = 'feedback-form-state';
 
 refs.form.addEventListener('submit', onFormSubmit);
@@ -15,8 +14,9 @@ refs.form.addEventListener('input', throttle(onFormInput, 500));
 checkLocalStorage();
 
 function onFormInput(evt) {
-  formData[evt.target.name] = evt.target.value;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+  const formData = new FormData(refs.form);
+  const values = Object.fromEntries(formData.entries());
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(values));
 }
 
 function checkLocalStorage() {
@@ -31,25 +31,16 @@ function checkLocalStorage() {
 
 function onFormSubmit(evt) {
   evt.preventDefault();
-
-  if (
-    (refs.emailInput.value === '' || refs.emailInput.value === undefined) &&
-    (refs.textarea.value === '' || refs.textarea.value === undefined)
-  ) {
+  if (refs.emailInput.value === '' && refs.textarea.value === '') {
     alert('Ви не ввели ваші дані');
     return;
   }
-  if (
-    refs.emailInput.value === '' ||
-    refs.emailInput.value === undefined ||
-    refs.textarea.value === '' ||
-    refs.textarea.value === undefined
-  ) {
-    alert('Ви ввели не всі дані');
+  if (refs.emailInput.value === '' || refs.textarea.value === '') {
+    alert('Ви ввели НЕ всі дані');
     return;
   }
-
+  const returnFormData = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  console.log(returnFormData);
   evt.currentTarget.reset();
   localStorage.removeItem(STORAGE_KEY);
-  console.log(formData);
 }
